@@ -2,6 +2,8 @@ import 'package:amazon_clone_tutorial/constants/global_variables.dart';
 import 'package:amazon_clone_tutorial/router.dart';
 import 'package:flutter/material.dart';
 
+import 'features/auth/services/auth_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
