@@ -1,18 +1,18 @@
-console.log("Hello, World");
-//print('hello world')
-
+// IMPORTS FROM PACKAGES
 const express = require("express");
-// import 'package:express/express.dart
-const PORT = 3000;
 
+//IMPORTS FROM OTHER FILES
+const authRouter = require("./routes/auth");
+
+// CLIENT -> SERVER -> CLIENT
+
+// INIT
+const PORT = 3000;
 const app = express();
 
-//CREATING AN API WITH NODE.JS  USING EXPRESS
-//http://<youripaddress>/hello-world
-app.get("/hello-world", (req, res) => {
-  res.json({ hi: "hello world" });
-});
-//GET, PUT, POST, DELETE, UPDATE -> CRUDb
+// middleware
+app.use(authRouter);
+
 app.listen(PORT, () => {
   console.log(`connected at port ${PORT}`);
 });
