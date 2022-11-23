@@ -1,11 +1,7 @@
 // IMPORTS FROM PACKAGES
 const express = require("express");
 const mongoose = require("mongoose");
-
-//IMPORTS FROM OTHER FILES
 const authRouter = require("./routes/auth");
-
-// CLIENT -> SERVER -> CLIENT
 
 // INIT
 const PORT = 3000;
