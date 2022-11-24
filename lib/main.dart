@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Amazon Clone',
       theme: ThemeData(
         scaffoldBackgroundColor: GlobalVariables.backgroundColor,
+        // ignore: prefer_const_constructors
         colorScheme: ColorScheme.light(
           primary: GlobalVariables.secondaryColor,
         ),

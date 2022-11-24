@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import
+
 import 'dart:convert';
 
 import 'package:amazon_clone_tutorial/constants/utils.dart';
