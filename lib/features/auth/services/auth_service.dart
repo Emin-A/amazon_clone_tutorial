@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:amazon_clone_tutorial/constants/error_handling.dart';
 import 'package:amazon_clone_tutorial/constants/utils.dart';
+// ignore: unused_import
 import 'package:amazon_clone_tutorial/features/home/screens/home_screen.dart';
 import 'package:amazon_clone_tutorial/models/user.dart';
 import 'package:amazon_clone_tutorial/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../common/widgets/bottom_bar.dart';
 import '../../../constants/global_variables.dart';
 import 'package:http/http.dart' as http;
 
@@ -77,7 +79,7 @@ class AuthService {
           // ignore: use_build_context_synchronously
           Navigator.pushNamedAndRemoveUntil(
             context,
-            HomeScreen.routeName,
+            BottomBar.routeName,
             (route) => false,
           );
         },
