@@ -12,8 +12,8 @@ class AdminScreen extends StatefulWidget {
 
 class _AdminScreenState extends State<AdminScreen> {
   int _page = 0;
-  double bottomBarWidth = 42;
-  double bottomBarBorderWidth = 5;
+  double bottomBarWidth = 42.0;
+  double bottomBarBorderWidth = 5.0;
 
   List<Widget> pages = [
     const PostsScreen(),

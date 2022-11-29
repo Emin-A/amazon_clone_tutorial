@@ -27,13 +27,13 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   final ProductDetailsServices productDetailsServices =
       ProductDetailsServices();
-  double avgRating = 0;
-  double myRating = 0;
+  double avgRating = 0.0;
+  double myRating = 0.0;
 
   @override
   void initState() {
     super.initState();
-    double totalRating = 0;
+    double totalRating = 0.0;
     for (int i = 0; i < widget.product.rating!.length; i++) {
       totalRating += widget.product.rating![i].rating;
       if (widget.product.rating![i].userId ==
