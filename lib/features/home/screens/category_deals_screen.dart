@@ -1,4 +1,5 @@
 import 'package:amazon_clone_tutorial/features/home/services/home_services.dart';
+import 'package:amazon_clone_tutorial/features/product_details/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../common/widgets/loader.dart';
 import '../../../models/product.dart';
@@ -100,26 +101,33 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                     itemBuilder: (context, index) {
                       final product = productList![index];
                       // ignore: prefer_const_constructors
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 130,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black12,
-                                  width: 0.5,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, ProductDetailScreen.routeName,
+                              arguments: product);
+                        },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 130,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 0.5,
+                                  ),
                                 ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Image.network(
-                                  product.images[0],
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Image.network(
+                                    product.images[0],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     },
                   ),
