@@ -14,6 +14,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      // ignore: sort_child_properties_last
       child: Text(
         text,
         style: TextStyle(
