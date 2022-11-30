@@ -23,7 +23,7 @@ class CartSubtotal extends StatelessWidget {
             ),
           ),
           const Text(
-            '\$$sum',
+            '\$sum',
             // ignore: unnecessary_const
             style: const TextStyle(
               fontSize: 20,
