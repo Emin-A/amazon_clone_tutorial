@@ -46,6 +46,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   infinity: ^1.0.1
   pay: ^1.0.11
+  geolocator: ^9.0.2
+  style: ^0.0.5
 
 dev_dependencies:
   flutter_test:
