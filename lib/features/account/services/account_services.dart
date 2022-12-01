@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:convert';
 
 import 'package:amazon_clone_tutorial/constants/error_handling.dart';
@@ -18,6 +20,7 @@ class AccountServices {
   Future<List<Order>> fetchMyOrders({
     required BuildContext context,
   }) async {
+    // ignore: no_leading_underscores_for_local_identifier
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Order> orderList = [];
     try {
@@ -52,9 +55,9 @@ class AccountServices {
   void logOut(BuildContext context) async {
     try {
       // ignore: unused_local_variable
-      SharedPreferences sharedPreferences =
+      SharedPreferences _sharedPreferences =
           await SharedPreferences.getInstance();
-      await SharedPreferences.setString('x-auth-token', '');
+      await _sharedPreferences.setString('x-auth-token', '');
       // ignore: use_build_context_synchronously
       Navigator.pushNamedAndRemoveUntil(
         context,
