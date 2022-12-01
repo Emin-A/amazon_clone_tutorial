@@ -1,7 +1,14 @@
+// ignore_for_file: depend_on_referenced_packages
+
+import 'package:amazon_clone_tutorial/common/widgets/custom_button.dart';
 import 'package:amazon_clone_tutorial/constants/global_variables.dart';
+import 'package:amazon_clone_tutorial/features/admin/services/admin_services.dart';
 import 'package:amazon_clone_tutorial/features/search/screens/search_screen.dart';
 import 'package:amazon_clone_tutorial/models/order.dart';
+import 'package:amazon_clone_tutorial/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   static const String routeName = '/order-details';
@@ -17,6 +24,8 @@ class OrderDetailScreen extends StatefulWidget {
 
 class _OrderDetailScreenState extends State<OrderDetailScreen> {
   int currentStep = 0;
+  final AdminServices adminServices = AdminServices();
+
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
@@ -27,8 +36,24 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     currentStep = widget.order.status;
   }
 
+  // !!! ONLY FOR ADMIN!!!
+  void changeOrderStatus(int status) {
+    adminServices.changeOrderStatus(
+      context: context,
+      status: status + 1,
+      order: widget.order,
+      onSuccess: () {
+        setState(() {
+          currentStep += 1;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -68,16 +93,19 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.only(top: 10),
                         border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(7),
-                            ),
-                            borderSide: BorderSide.none),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
+                          borderSide: BorderSide.none,
+                        ),
                         enabledBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(7),
                           ),
-                          borderSide:
-                              BorderSide(color: Colors.black38, width: 1),
+                          borderSide: BorderSide(
+                            color: Colors.black38,
+                            width: 1,
+                          ),
                         ),
                         hintText: 'Search Amazon.in',
                         hintStyle: const TextStyle(
@@ -114,32 +142,37 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               ),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black12),
+                  border: Border.all(
+                    color: Colors.black12,
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Order Date:       ${DateFormat().format(
+                    Text('Order Date:      ${DateFormat().format(
                       DateTime.fromMillisecondsSinceEpoch(
                           widget.order.orderedAt),
                     )}'),
-                    Text('Order ID:         ${widget.order.id}'),
-                    Text('Order Total:    \$${widget.order.totalPrice}'),
+                    Text('Order ID:          ${widget.order.id}'),
+                    Text('Order Total:      \$${widget.order.totalPrice}'),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               const Text(
                 'Purchase Details',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black12),
+                  border: Border.all(
+                    color: Colors.black12,
+                  ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -177,9 +210,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               const Text(
                 'Tracking',
                 style: TextStyle(
@@ -189,18 +220,26 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black12),
+                  border: Border.all(
+                    color: Colors.black12,
+                  ),
                 ),
                 child: Stepper(
-                  currentStep = currentStep,
+                  currentStep: currentStep,
                   controlsBuilder: (context, details) {
+                    if (user.type == 'admin') {
+                      return CustomButton(
+                        text: 'Done',
+                        onTap: () => changeOrderStatus(details.currentStep),
+                      );
+                    }
                     return const SizedBox();
                   },
                   steps: [
                     Step(
                       title: const Text('Pending'),
                       content: const Text(
-                        'Your order is yet to be delivered!',
+                        'Your order is yet to be delivered',
                       ),
                       isActive: currentStep > 0,
                       state: currentStep > 0

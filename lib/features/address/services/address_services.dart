@@ -65,6 +65,7 @@ void placeOrder(
     required double total}) async {
   final userProvider = Provider.of<UserProvider>(context, listen: false);
   try {
+    // ignore: prefer_typing_uninitialized_variables
     var totalSum;
     http.Response res = await http.post(Uri.parse('$uri/api/order'),
         headers: {

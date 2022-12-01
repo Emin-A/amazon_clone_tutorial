@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:amazon_clone_tutorial/common/widgets/loader.dart';
 import 'package:amazon_clone_tutorial/constants/global_variables.dart';
 import 'package:amazon_clone_tutorial/features/account/screens/account_screen.dart';

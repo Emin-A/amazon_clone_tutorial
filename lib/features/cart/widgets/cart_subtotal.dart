@@ -15,6 +15,7 @@ class CartSubtotal extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10),
       child: Row(
+        // ignore: prefer_const_literals_to_create_immutables
         children: [
           const Text(
             'Subtotal ',
