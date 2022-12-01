@@ -107,6 +107,7 @@ class _AddressScreenState extends State<AddressScreen> {
   Widget build(BuildContext context) {
     var address = context.watch<UserProvider>().user.address;
 
+    // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
     var GooglePayButtonStyle;
     return Scaffold(
       appBar: PreferredSize(
@@ -199,7 +200,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 onPaymentResult: onGooglePayResult,
                 paymentItems: paymentItems,
                 height: 50,
-                style: GooglePayButtonStyle.black,
+                key: GooglePayButtonStyle.black,
                 type: GooglePayButtonType.buy,
                 margin: const EdgeInsets.only(top: 15),
                 loadingIndicator: const Center(

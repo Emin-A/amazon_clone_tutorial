@@ -51,6 +51,7 @@ class AccountServices {
 
   void logOut(BuildContext context) async {
     try {
+      // ignore: unused_local_variable
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
       await SharedPreferences.setString('x-auth-token', '');
